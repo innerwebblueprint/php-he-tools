@@ -2,7 +2,7 @@
 
 This is a collection of tools to interact with Hive Engine sidechain (from HIVE Blockchain).
 
-This project has been mainlyinspired by [PHP-HIVE-Tools](https://github.com/dragosroua/php-hive-tools) made by [https://github.com/dragosroua](Dragos Roua).
+This project has been mainlyinspired by [PHP-HIVE-Tools](https://github.com/dragosroua/php-hive-tools) made by [Dragos Roua](https://github.com/dragosroua).
 
 Very early stage project. Use it at your own risk.
 
