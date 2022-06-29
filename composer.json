@@ -1,0 +1,23 @@
+{
+	"name": "fkosmala/php-he-tools",
+	"description": "Tools to interact with Hiveengine sidechain (HIVE Blockchain)",
+	"type": "project",
+	"keywords": ["hive", "hive-engine", "blockchain", "engine"],
+	"homepage": "https://github.com/fkosmala/php-he-tools",
+	"license": "GPL-3.0-only",
+	"authors": [
+		{
+			"name": "Florent Kosmala",
+			"email": "kosflorent@gmail.com",
+			"homepage": "https://florent-kosmala.fr/"
+		}
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"autoload": {
+        "psr-4": {
+            "FKosmala\\PHPHeTools\\": "src/"
+        }
+    }
+}
