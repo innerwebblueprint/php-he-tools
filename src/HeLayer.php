@@ -3,61 +3,49 @@
 	namespace FKosmala\PHPHeTools;
 	
 	class HeLayer {
+		// Toggle to true if you want to display the query & the result
+		private $debug = false;
+		
 		// Default node for query HiveEngine API
-		private $heNode ="api2.hive-engine.com/rpc/contracts";
+		private $heNode ="api.hive-engine.com/rpc/contracts";
+		
+		private $throw_exception = false;
 		
 		// Force Scheme with HTTPS
 		private $scheme = 'https://';
 		
-		// Tooggle to True if you want to display the query & the result
-		private $debug = false;
-		
-		private $throw_exception = false;
-		
-		public function __construct($config = array()) {
+		public function __construct($heConfig = array()) {
 			
-			if (array_key_exists('heNode', $config)) {
-				$this->webservice_url = $config['heNode'];
+			if (array_key_exists('debug', $heConfig)) {
+				$this->debug = $heConfig['debug'];
 			}
 			
-			if (array_key_exists('debug', $config)) {
-				$this->debug = $config['debug'];
+			if (array_key_exists('heNode', $heConfig)) {
+				$this->heNode = $heConfig['heNode'];
 			}
 			
-			if (array_key_exists('throw_exception', $config)) {
-				$this->throw_exception = $config['throw_exception'];
+			if (array_key_exists('throw_exception', $heConfig)) {
+				$this->throw_exception = $heConfig['throw_exception'];
 			}
 		}
 		
-		public function call($method, $params = array()) {
-			$request = $this->getRequest($method, $params);
-			$response = '';
-			$response = $this->curl($request);
-
-			if (array_key_exists('error', $response)) {
-				if ($this->throw_exception) {
-					throw new Exception($response['error']);
-				} else {
-					return $response;
-				}
-			}
-			return $response['result'];
-		}
-		
-		public function getRequest($method, $params) {
+		public function getRequest($method, $contract, $table, $query, $limit = 1) {
 			$request = array(
+				"id" => 1,
 				"jsonrpc" => "2.0",
 				"method" => $method,
-				"params" => $params,
-				"id" => 1
+				"params" => array(
+					"contract" => $contract,
+					"table" => $table,
+					"query" => $query,
+				),
+				"limit" => $limit
 			);
 				
 			$request_json = json_encode($request);
 			
 			if ($this->debug) {
-				echo "<pre><br>request_json<br/>";
-				print $request_json . "\n";
-				echo "</pre>";
+				echo "<pre>request_json<br/>".$request_json."\n</pre>";
 			}
 			
 			return $request_json;
@@ -65,20 +53,38 @@
 
 		public function curl($data) {
 			$ch = curl_init();
-			$this->scheme = 'https://';
+			
 			curl_setopt($ch, CURLOPT_URL, $this->scheme.$this->heNode);
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+			
 			$result = curl_exec($ch);
 
 			if ($this->debug) {
-				echo "<pre><br>result<br>";
-				print $result . "\n";
-				echo "</pre>";
+				echo "<pre><br>Result :<br>".$result."</pre>\n";
 			}
 
-			$result = json_decode($result, true);
-
 			return $result;
+		}
+		
+		public function call($method, $params = array()) {
+			$contract = $params['contract'];
+			$table = $params['table'];
+			$query = $params['query'];
+			$limit = $params['limit'];
+			$request = $this->getRequest($method, $contract, $table, $query, $limit);
+			$response = $this->curl($request);
+			//$response = json_decode($response, true);
+			
+			if (empty($response['result'])) {
+				if ($this->throw_exception) {
+					throw new Exception('Error retrieve HiveEngine API query');
+				} else {
+					return 'error';
+				}
+			}
+			
+			return $response['result'];
 		}
 	}

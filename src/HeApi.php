@@ -7,13 +7,21 @@
 	class HeApi {
 		private $HeLayer;
 		
-		public function __construct($config = null) {
+		public function __construct($heConfig = null) {
 			$this->HeLayer = new HeLayer($heConfig);
 		}
 		
-		// Get Status of the HE sidechain
-		public function get_status(){
-			$result = $this->HiveLayer->call('get_status');
+		public function getHeTokensFromAccount($account) {
+			$params = array(
+				"contract" => "tokens",
+				"table" => "balances",
+				"query" => array(
+					"account" => $account
+				),
+				"limit" => 1
+			);
+			$result = $this->HeLayer->call('find', $params);
 			return $result;
 		}
+		
 	}
