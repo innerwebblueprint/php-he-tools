@@ -75,7 +75,7 @@
 			$limit = $params['limit'];
 			$request = $this->getRequest($method, $contract, $table, $query, $limit);
 			$response = $this->curl($request);
-			//$response = json_decode($response, true);
+			$response = json_decode($response, true);
 			
 			if (empty($response['result'])) {
 				if ($this->throw_exception) {
