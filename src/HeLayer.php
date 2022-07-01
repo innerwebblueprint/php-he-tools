@@ -81,7 +81,7 @@
 				if ($this->throw_exception) {
 					throw new Exception('Error retrieve HiveEngine API query');
 				} else {
-					return 'error';
+					return response['result'];
 				}
 			}
 			
