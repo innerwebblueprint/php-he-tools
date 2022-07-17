@@ -50,11 +50,28 @@
 			
 			return $request_json;
 		}
-
-		public function curl($data) {
+		
+		public function getRPCRequest($method) {
+			$request = array(
+				"id" => 1,
+				"jsonrpc" => "2.0",
+				"method" => $method,
+				"params" => array()
+			);
+				
+			$request_json = json_encode($request);
+			
+			if ($this->debug) {
+				echo "<pre>request_json<br/>".$request_json."\n</pre>";
+			}
+			
+			return $request_json;
+		}
+		
+		public function curl($data, $endpoint) {
 			$ch = curl_init();
 			
-			curl_setopt($ch, CURLOPT_URL, $this->scheme.$this->heNode);
+			curl_setopt($ch, CURLOPT_URL, $this->scheme.$this->heNode.$endpoint);
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
@@ -67,14 +84,19 @@
 
 			return $result;
 		}
-		
-		public function call($method, $params = array()) {
-			$contract = $params['contract'];
-			$table = $params['table'];
-			$query = $params['query'];
-			$limit = $params['limit'];
-			$request = $this->getRequest($method, $contract, $table, $query, $limit);
-			$response = $this->curl($request);
+	
+		public function call($method, $params = array(), $endpoint="/contracts") {
+			if (!empty($params)) {
+				$contract = $params['contract'];
+				$table = $params['table'];
+				$query = $params['query'];
+				$limit = $params['limit'];
+				$request = $this->getRequest($method, $contract, $table, $query, $limit);
+			}
+			else {
+				$request = $this->getRPCRequest($method);
+			}
+			$response = $this->curl($request, $endpoint);
 			$response = json_decode($response, true);
 			
 			if (empty($response['result'])) {

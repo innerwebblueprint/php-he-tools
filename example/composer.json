@@ -1,0 +1,6 @@
+{
+    "minimum-stability" : "dev",
+    "require": {
+        "fkosmala/php-he-tools": "dev-main"
+    }
+}

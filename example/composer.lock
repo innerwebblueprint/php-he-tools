@@ -1,0 +1,70 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "44781a104fa8c9831b168ef48fcf853d",
+    "packages": [
+        {
+            "name": "fkosmala/php-he-tools",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/fkosmala/php-he-tools.git",
+                "reference": "83758331bdfef081d5926f596fbe193885192408"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/fkosmala/php-he-tools/zipball/83758331bdfef081d5926f596fbe193885192408",
+                "reference": "83758331bdfef081d5926f596fbe193885192408",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.4"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FKosmala\\PHPHeTools\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Florent Kosmala",
+                    "email": "kosflorent@gmail.com",
+                    "homepage": "https://florent-kosmala.fr/"
+                }
+            ],
+            "description": "Tools to interact with HiveEngine sidechain (HIVE Blockchain)",
+            "homepage": "https://github.com/fkosmala/php-he-tools",
+            "keywords": [
+                "blockchain",
+                "engine",
+                "hive",
+                "hive-engine"
+            ],
+            "support": {
+                "issues": "https://github.com/fkosmala/php-he-tools/issues",
+                "source": "https://github.com/fkosmala/php-he-tools/tree/main"
+            },
+            "time": "2022-07-01T07:27:10+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "fkosmala/php-he-tools": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
+}

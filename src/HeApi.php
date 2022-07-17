@@ -11,7 +11,19 @@
 			$this->HeLayer = new HeLayer($heConfig);
 		}
 		
-		public function getHeTokensFromAccount($account) {
+		public function getStatus() {
+			$params = array();
+			$result = $this->HeLayer->call('getStatus', $params, '/blockchain');
+			return $result;
+		}
+		
+		public function getLatestBlockInfo() {
+			$params = array();
+			$result = $this->HeLayer->call('getLatestBlockInfo', $params, '/blockchain');
+			return $result;
+		}
+		
+		public function getAccountTokens($account) {
 			$params = array(
 				"contract" => "tokens",
 				"table" => "balances",
