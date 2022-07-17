@@ -18,7 +18,7 @@ $api = new HeApi($config);
 $account = "bambukah";
 
 // try the method
-$result = $api->getLatestBlockInfo();
+$result = $api->getAccountTokens($account);
 
 // Display the result
 print_r($result);

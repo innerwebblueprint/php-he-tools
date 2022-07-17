@@ -51,12 +51,12 @@
 			return $request_json;
 		}
 		
-		public function getRPCRequest($method) {
+		public function getRPCRequest($method, $params=array()) {
 			$request = array(
 				"id" => 1,
 				"jsonrpc" => "2.0",
 				"method" => $method,
-				"params" => array()
+				"params" => $params
 			);
 				
 			$request_json = json_encode($request);
@@ -86,7 +86,7 @@
 		}
 	
 		public function call($method, $params = array(), $endpoint="/contracts") {
-			if (!empty($params)) {
+			if (!empty($params['contract'])) {
 				$contract = $params['contract'];
 				$table = $params['table'];
 				$query = $params['query'];
@@ -94,7 +94,7 @@
 				$request = $this->getRequest($method, $contract, $table, $query, $limit);
 			}
 			else {
-				$request = $this->getRPCRequest($method);
+				$request = $this->getRPCRequest($method, $params);
 			}
 			$response = $this->curl($request, $endpoint);
 			$response = json_decode($response, true);

@@ -23,6 +23,14 @@
 			return $result;
 		}
 		
+		public function getBlockInfo($block) {
+			$params = array(
+				"blockNumber" => $block
+			);
+			$result = $this->HeLayer->call('getBlockInfo', $params, '/blockchain');
+			return $result;
+		}
+		
 		public function getAccountTokens($account) {
 			$params = array(
 				"contract" => "tokens",
