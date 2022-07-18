@@ -30,7 +30,7 @@ Init the API
 ```php
 $api = new HeApi($config);
 ```
-You can now use every methods of PHP-HE-Tools !
+You can now use every methods of PHP-HE-Tools ! All available methods are in [methods.md](methods.md) file.
 
 ## Example
 There is a small example page into the `example` folder.
