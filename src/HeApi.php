@@ -78,6 +78,34 @@
 			$result = $this->HeLayer->call('find', $params);
 			return $result;
 		}
+		
+		public function getPendingUndelegations($account, $token=null) {
+			
+			if($token != null) {
+				$params = array(
+					"contract" => "tokens",
+					"table" => "pendingUndelegations",
+					"query" => array(
+						"account" => $account,
+						"symbol" => strtoupper($token)
+					),
+					"limit" => 1
+				);
+			} else {
+				$params = array(
+					"contract" => "tokens",
+					"table" => "pendingUndelegations",
+					"query" => array(
+						"account" => $account
+					),
+					"limit" => 1
+				);
+			}
+
+			$result = $this->HeLayer->call('find', $params);
+			return $result;
+		}
+		
 		// account related methods
 		public function getAccountBalance($account) {
 			$params = array(
