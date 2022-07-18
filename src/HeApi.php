@@ -11,6 +11,7 @@
 			$this->HeLayer = new HeLayer($heConfig);
 		}
 		
+		// Methods related to the "/blockchain" endpoint
 		public function getStatus() {
 			$params = array();
 			$result = $this->HeLayer->call('getStatus', $params, '/blockchain');
@@ -31,7 +32,16 @@
 			return $result;
 		}
 		
-		public function getAccountTokens($account) {
+		public function getTransactionInfo($txid) {
+			$params = array(
+				"txid" => $txid
+			);
+			$result = $this->HeLayer->call('getTransactionInfo', $params, '/blockchain');
+			return $result;
+		}
+		
+		// account related methods
+		public function getAccountBalance($account) {
 			$params = array(
 				"contract" => "tokens",
 				"table" => "balances",
