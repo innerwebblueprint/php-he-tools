@@ -40,6 +40,44 @@
 			return $result;
 		}
 		
+		// Delegation methods
+		public function getDelegationFrom($account, $token=null) {
+			
+			if($token!=null) {
+				$token = strtoupper($token);
+			}
+			
+			$params = array(
+				"contract" => "tokens",
+				"table" => "delegations",
+				"query" => array(
+					"from" => $account,
+					"symbol" => $token
+				),
+				"limit" => 1
+			);
+			$result = $this->HeLayer->call('find', $params);
+			return $result;
+		}
+		
+		public function getDelegationTo($account, $token=null) {
+			
+			if($token!=null) {
+				$token = strtoupper($token);
+			}
+			
+			$params = array(
+				"contract" => "tokens",
+				"table" => "delegations",
+				"query" => array(
+					"to" => $account,
+					"symbol" => $token
+				),
+				"limit" => 1
+			);
+			$result = $this->HeLayer->call('find', $params);
+			return $result;
+		}
 		// account related methods
 		public function getAccountBalance($account) {
 			$params = array(

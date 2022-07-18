@@ -7,7 +7,7 @@
 		private $debug = false;
 		
 		// Default node for query HiveEngine API
-		private $heNode ="api.hive-engine.com/rpc/contracts";
+		private $heNode ="api.hive-engine.com/rpc";
 		
 		private $throw_exception = false;
 		
