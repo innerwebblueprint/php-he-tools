@@ -51,5 +51,5 @@ Fields:
 ### getPendingUndelegations($account, $token)
 Get undelegations from the specified account. If token is specified too, returns only for the selected token.
 Fields:
- $account (required) : the account where delegations are to
- $token (optional) : if specified, returns only selected token delegation
+- $account (required) : the account where delegations are to
+- $token (optional) : if specified, returns only selected token delegation
