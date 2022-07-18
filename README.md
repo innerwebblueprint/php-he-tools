@@ -10,7 +10,7 @@ This library was mainly inspired by Dragos Roua [PHP Hive Tools](https://github.
 
 ## Installation & usage
 Use Composer to install this lib :
-``composer require fkosmala/php-he-tools`
+`composer require fkosmala/php-he-tools`
 
 Init Composer into your PHP file and load the API :
 ```php
