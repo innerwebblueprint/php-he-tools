@@ -108,4 +108,31 @@ class HeLayer {
 		
 		return $response['result'];
 	}
+	
+	public function callHistory($account = null, $token = null, $limit = 100) {
+		$historyUrl = "https://accounts.hive-engine.com/accountHistory?account=".$account."&symbol=".$token."&limit=".$limit;
+		
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $historyUrl);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		
+		$result = curl_exec($ch);
+
+		if ($this->debug) {
+			echo "<pre><br>Result :<br>".$result."</pre>\n";
+		}
+
+		$response = json_decode($result, true);
+		
+		if (empty($response['result'])) {
+			if ($this->throw_exception) {
+				throw new Exception('Error retrieve HiveEngine API query');
+			} else {
+				return $response;
+			}
+		}
+		
+		return $response;
+	}
 }

@@ -105,7 +105,7 @@ class HeApi {
 		return $result;
 	}
 
-	// account related methods
+	// Account related methods
 	public function getAccountBalance($account) {
 		$params = array(
 			"contract" => "tokens",
@@ -116,6 +116,15 @@ class HeApi {
 			"limit" => 1
 		);
 		$result = $this->HeLayer->call('find', $params);
+		return $result;
+	}
+
+	public function getAccountHistory($account, $token=null, $limit=100) {
+		if($token!=null) {
+			$token = strtoupper($token);
+		}
+		
+		$result = $this->HeLayer->callHistory($account, $token, $limit);
 		return $result;
 	}
 

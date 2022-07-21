@@ -18,12 +18,12 @@ Get last block information.
 ### getBlockInfo($block)
 Get specified block information.
 Fields:
-- $block : Block to retrieve all data from this.
+- $block (required): Block to retrieve all data from this.
 
 ### getTransactionInfo($txid)
 Get specified TX data.
 Fields :
-- $txid : the transaction ID
+- $txid (required): the transaction ID
 
 ----
 
@@ -31,7 +31,14 @@ Fields :
 ### getAccountBalance($account)
 Get specified account balance for every token.
 Fields :
-- $account : The account to take all tokens balances
+- $account (required): The account to take all tokens balances
+
+### getAccountHistory($account, $token, $limit)
+Get TXs history from specified account.
+Fields :
+- $account (required): Account from which to take the history
+- $token (optional): If specified, returns only toekn txs history
+- $limit (optional, default:100): Ifspecified, return only the specified number results
 
 ----
 
